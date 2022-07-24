@@ -1,6 +1,8 @@
 version: 2.1
 orbs:
   node: circleci/node@5.0.1
+  browser-tools: circleci/browser-tools@1.4.0
+
 jobs:
   build:
     working_directory: ~/my-project
