@@ -1,11 +1,11 @@
 version: 2.1
 orbs:
-  browser-tools: circleci/browser-tools@1.4.0
+  node: circleci/node@5.0.1
 jobs:
   build:
     working_directory: ~/my-project
     docker:
-      - image: circleci/node:6-browsers
+      - image: cimg/node:16.10.0
         environment:
           CHROME_BIN: "/usr/bin/google-chrome"
     
