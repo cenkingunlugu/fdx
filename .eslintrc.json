@@ -18,8 +18,9 @@
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
         "airbnb-typescript/base",
-        "prettier/@typescript-eslint",
-        "plugin:prettier/recommended"
+        "plugin:prettier/recommended",
+        "plugin:import/errors",
+        "plugin:import/warnings"
       ],
       "rules": {
         "@angular-eslint/directive-selector": [
@@ -37,7 +38,23 @@
             "prefix": "app",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "import/no-unresolved": "error"
+      },
+      "settings": {
+        "import/parsers": {
+          "@typescript-eslint/parser": [".ts", ".tsx"]
+        },
+        "import/resolver": {
+          "typescript": {
+            "alwaysTryTypes": true, // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
+    
+            // Choose from one of the "project" configs below or omit to use <root>/tsconfig.json by default
+    
+            // use <root>/path/to/folder/tsconfig.json
+            "project": "./"
+          }
+        }
       }
     },
     {
