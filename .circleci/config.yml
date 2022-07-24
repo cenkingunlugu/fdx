@@ -5,7 +5,9 @@ jobs:
   build:
     working_directory: ~/my-project
     docker:
-      - image: cimg/node:14.18.3-browsers
+      - image: circleci/node:6-browsers
+        environment:
+          CHROME_BIN: "/usr/bin/google-chrome"
     
     steps:
       - checkout
