@@ -25,12 +25,15 @@ export class AppComponent implements OnInit {
   onClickSubmit() {
     if (this.userInfo.valid) {
       this.http.post('https://demo-api.now.sh/users', this.userInfo.value)
-      .pipe(catchError((err) => {
-        this.submissionSuccesful = false;
-        return of(err);
-      }))
-      .subscribe(() => {
-        this.submissionSuccesful = true;
+      .subscribe({
+        next: (res) => {
+          console.log('success', res);
+          this.submissionSuccesful = true;
+        }, 
+        error: (error) => {
+          this.submissionSuccesful = false;
+          console.log('error', error);
+        }
       });
     }
   }

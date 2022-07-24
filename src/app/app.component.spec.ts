@@ -47,7 +47,7 @@ describe('AppComponent', () => {
       const req = httpMock.expectOne('https://demo-api.now.sh/users');
       expect(req.request.method).toBe("POST");
       req.flush({success: true});  
-      expect(component.submissionSuccesful).toBeTrue()    
+      expect(component.submissionSuccesful).toBeTruthy();    
     });
 
     it('should show error message if api throws error', () => {
@@ -70,8 +70,8 @@ describe('AppComponent', () => {
       component.userInfo.updateValueAndValidity();
       
       component.onClickSubmit();
-      const req = httpMock.expectOne('https://demo-api.now.sh/users').error(new ProgressEvent('network error'));
-      expect(component.submissionSuccesful).toBeFalse()    
+      httpMock.expectOne('https://demo-api.now.sh/users').error(new ProgressEvent('network error'));
+      expect(component.submissionSuccesful).toBeFalsy();
     });
     it('should not be able to make a request to api when invalid', () => {
       component.userInfo.setValue({
