@@ -4,8 +4,7 @@ jobs:
     working_directory: ~/my-project
     docker:
       - image: cimg/node:14.18.3-browsers
-    environment:
-      CHROME_BIN: /usr/bin/google-chrome
+    
     steps:
       - checkout
       - restore_cache:
@@ -22,6 +21,8 @@ jobs:
       - run:
           name: Unit Test
           command: npm run ng test -- --watch=false --browsers=ChromeHeadless --code-coverage
+          environment:
+            CHROME_BIN: /usr/bin/google-chrome
       - run:
           name: Coveralls
           command: cat ./coverage/angular-hello-world/lcov.info  | ./node_modules/coveralls/bin/coveralls.js
