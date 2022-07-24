@@ -4,8 +4,8 @@ jobs:
     working_directory: ~/my-project
     docker:
       - image: cimg/node:14.18.3-browsers
-        environment:
-          CHROME_BIN: /usr/bin/google-chrome
+    environment:
+      CHROME_BIN: /usr/bin/google-chrome
     steps:
       - checkout
       - restore_cache:
