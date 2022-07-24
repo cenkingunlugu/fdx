@@ -2,7 +2,9 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "cli": {
     "analytics": false,
-    "defaultCollection": "@angular-eslint/schematics"
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   },
   "version": 1,
   "newProjectRoot": "projects",
@@ -15,6 +17,9 @@
         },
         "@schematics/angular:application": {
           "strict": true
+        },
+        "@ngneat/spectator:spectator-component": {
+          "jest": true
         }
       },
       "root": "",
@@ -120,6 +125,5 @@
         }
       }
     }
-  },
-  "defaultProject": "fedex-assignment"
+  }
 }
