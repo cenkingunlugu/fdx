@@ -11,7 +11,7 @@ jobs:
         environment:
           CHROME_BIN: "/usr/bin/google-chrome"      
     steps:
-      - browser-tools/install-browser-tools
+      - browser-tools/install-chromedriver
       - checkout
       - restore_cache:
           key: my-project-{{ .Branch }}-{{ checksum "package-lock.json" }}
