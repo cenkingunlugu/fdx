@@ -3,49 +3,54 @@
   assets/images/logo@2x.png 2x" alt="">
   <h1>Sign Up</h1>
   <section class="user-form">
-    <form novalidate [formGroup]="userInfo" method="post"> 
-      <div class="form-group">
+    <form novalidate [formGroup]="userInfo" (ngSubmit)="onClickSubmit()" method="post"> 
+      <div class="form-group has-validation">
         <label for="name">Name:</label>
-        <input class="form-control" type="text" required name="name" id="name" formControlName="name" placeholder="Enter name"/>
-        <div *ngIf="userInfo.controls['name'].touched && userInfo.controls['name'].hasError('required')" class="alert alert-danger">
+        <input data-test="name-input" class="form-control" type="text" required name="name" id="name" formControlName="name" placeholder="Enter name"/>
+        <div data-test="name-required-error" *ngIf="userInfo.controls['name'].touched && userInfo.controls['name'].hasError('required')" class="invalid-feedback">
           Name is required
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group  has-validation">
         <label for="surname">Surname:</label>
-        <input class="form-control" type="text" required name="surname" id="surname" formControlName="surname" placeholder="Enter surname"/>
-        <div *ngIf="userInfo.controls['surname'].touched && userInfo.controls['surname'].hasError('required')" class="alert alert-danger">
+        <input data-test="surname-input" class="form-control" type="text" required name="surname" id="surname" formControlName="surname" placeholder="Enter surname"/>
+        <div data-test="surname-required-error" *ngIf="userInfo.controls['surname'].touched && userInfo.controls['surname'].hasError('required')" class="invalid-feedback">
           Surname is required
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group has-validation">
         <label for="email">Email:</label>
-        <input class="form-control" type="email" required name="email" id="email" formControlName="email" placeholder="Enter email"/>
-        <div *ngIf="userInfo.controls['email'].touched && userInfo.controls['email'].hasError('required')" class="alert alert-danger">
+        <input data-test="email-input" class="form-control" type="email" required name="email" id="email" formControlName="email" placeholder="Enter email"/>
+        <div data-test="email-required-error" *ngIf="userInfo.controls['email'].touched && userInfo.controls['email'].hasError('required')" class="invalid-feedback">
           Email is required
         </div>
-        <div *ngIf="userInfo.controls['email'].touched && userInfo.controls['email'].hasError('email')" class="alert alert-danger">
+        <div data-test="email-format-error" *ngIf="userInfo.controls['email'].touched && userInfo.controls['email'].hasError('email')" class="invalid-feedback">
           Please enter a valid email (Eg. test@abc.com)
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group has-validation">
         <label for="password">Password:</label>
-        <input class="form-control" type="password" required name="password" id="password" formControlName="password" placeholder="Enter password"/>
-        <div *ngIf="userInfo.controls['password'].touched && userInfo.controls['password'].hasError('required')" class="alert alert-danger">
-          Password is required
+        <input data-test="password-input" class="form-control" type="password" required name="password" id="password" formControlName="password" placeholder="Enter password"/>
+        <div data-test="password-required-error" *ngIf="userInfo.controls['password'].touched && userInfo.controls['password'].hasError('required')" class="invalid-feedback">
+          Password is required.
         </div>
-        <div *ngIf="userInfo.controls['password'].touched && userInfo.controls['password'].hasError('minlength') && !userInfo.controls['password'].hasError('required')" class="alert alert-danger">
-          Password should be a minimum of eight characters,
-
+        <div data-test="password-minlength-error" *ngIf="userInfo.controls['password'].touched && userInfo.controls['password'].hasError('minlength') && !userInfo.controls['password'].hasError('required')" class="invalid-feedback">
+          Password should be a minimum of eight characters.
         </div>
-        <div *ngIf="userInfo.controls['password'].touched && userInfo.controls['password'].hasError('upperAndLower') && !userInfo.controls['password'].hasError('required') && !userInfo.controls['password'].hasError('minlength')" class="alert alert-danger">
-          Password should contain lower and uppercase letters
+        <div data-test="password-lower-upper-error" *ngIf="userInfo.controls['password'].touched && userInfo.controls['password'].hasError('upperAndLower') && !userInfo.controls['password'].hasError('required') && !userInfo.controls['password'].hasError('minlength')" class="invalid-feedback">
+          Password should contain lower and uppercase letters.
         </div>
-        <div *ngIf="userInfo.controls['password'].touched && userInfo.controls['password'].hasError('noNameSurname') && !userInfo.controls['password'].hasError('upperAndLower') && !userInfo.controls['password'].hasError('required') && !userInfo.controls['password'].hasError('minlength')" class="alert alert-danger">
+        <div data-test="password-first-last-name-error" *ngIf="userInfo.controls['password'].touched && userInfo.controls['password'].hasError('noNameSurname') && !userInfo.controls['password'].hasError('upperAndLower') && !userInfo.controls['password'].hasError('required') && !userInfo.controls['password'].hasError('minlength')" class="invalid-feedback">
           Should not contain user’s first or last name.
         </div>
       </div>
-      <button [disabled]="!userInfo.valid" type="submit" class="btn btn-primary mt-3">Submit</button>
+      <div data-test="success-result" class="alert alert-success" role="alert" *ngIf="submissionSuccesful === true">
+        Sign up was successful.
+      </div>
+      <div data-test="error-result" class="alert alert-danger" role="alert" *ngIf="submissionSuccesful === false">
+        There was an error while signing up. Please try again later.
+      </div>
+      <button data-test="submit-button" [disabled]="!userInfo.valid" type="submit" class="btn btn-primary mt-3">Submit</button>
     </form>
   </section>
 </div>
